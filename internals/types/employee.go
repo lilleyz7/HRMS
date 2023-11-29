@@ -9,6 +9,7 @@ type Employee struct {
 	Infractions []Infraction `json:"infractions"`
 	SickDays    int          `json:"sickdays"`
 	PaidDays    int          `json:"paiddays"`
+	ClockedIn   bool         `json:"clockedin"`
 }
 
 type Infraction struct {
