@@ -8,12 +8,12 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/recover"
 
 	"github.com/lillez7/HRMS/internals/api/handlers"
-	"github.com/lillez7/HRMS/internals/database"
+	"github.com/lillez7/HRMS/internals/migrations"
 )
 
 func init() {
-	LoadDotEnv()
-	database.ConnectToDB()
+	Initialize()
+	migrations.AutoMigrate()
 }
 
 func main() {
@@ -25,6 +25,10 @@ func main() {
 	port := os.Getenv("PORT")
 
 	app.Get("/", handlers.GetAllEmployees)
+	app.Get("/single", handlers.GetEmpByID)
+	app.Post("/new", handlers.AddEmployee)
+	app.Delete("/delete", handlers.RemoveEmployee)
+	app.Put("/update", handlers.UpdateUserInfo)
 
 	app.Listen(":" + port)
 }
